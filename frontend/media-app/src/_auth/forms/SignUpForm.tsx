@@ -42,21 +42,24 @@ const SignUpForm: React.FC = ()=>{
     },
   })
 
-
+  // Submission function Handler
   function onSubmit(values: z.infer<typeof SignUpVaidationSchema>) {
     console.log(values)
   }
 
+
   return (
     <Form {...form}>
+      {/* Head Banner + Logo */}
       <div className='sm:w-420 flex-center flex-col'>
         <img src="" alt="logo" />
         <h2 className='h3-bold md:h2-bold pt-5 sm:pt-12'>Join in on the Fun!</h2>
-
+        {/* Sub Text */}
         <p className='text-light-3 small-medium md:base-regular'>Enter your details to create your account</p>
       </div><br/>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-3 mt-4">
 
+        {/* Name Input Element */}
         <FormField
           control={form.control}
           name="name"
@@ -74,6 +77,8 @@ const SignUpForm: React.FC = ()=>{
             </FormItem>
           )}
         />
+
+        {/* Username Input Element */}
         <FormField
           control={form.control}
           name="username"
@@ -90,6 +95,8 @@ const SignUpForm: React.FC = ()=>{
             </FormItem>
           )}
         />
+
+        {/* Email-ID Input Element */}
         <FormField
           control={form.control}
           name="email"
@@ -103,6 +110,8 @@ const SignUpForm: React.FC = ()=>{
             </FormItem>
           )}
         />
+
+        {/* Password Input Element */}
         <FormField
           control={form.control}
           name="username"
@@ -117,6 +126,7 @@ const SignUpForm: React.FC = ()=>{
           )}
         />
         
+        {/* Submit Button --> ShadCN Component */}
         <Button type="submit" variant="ghost">Submit</Button>
       </form>
     </Form>

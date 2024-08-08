@@ -1,12 +1,13 @@
+// IMPORT 
+
+// 1. Pre-defined Library
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
 
+// 2. Auth Layout Functional component
 const AuthLayout: React.FC = ()=>{
   const authAStatus=false;
   return (
-    // <div>
-    //   Auth-Layout
-    // </div>
     <>
       {authAStatus ? (
         <Navigate to='/' />
@@ -17,7 +18,6 @@ const AuthLayout: React.FC = ()=>{
           <section className="flex flex-1 justify-center items-center flex-col py-10">
             <Outlet />
           </section>
-          
         </>
       )}
     </>
