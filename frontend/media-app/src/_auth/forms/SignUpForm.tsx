@@ -5,6 +5,7 @@ import React from 'react';
 import * as z from 'zod';
 
 // 2. ShadCN imports
+import { Loader } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
@@ -21,12 +22,13 @@ import { Input } from "@/components/ui/input";
 
 // 3. User-defined inputs
 import { SignUpVaidationSchema } from '@/lib/validation';
+import { Link } from 'react-router-dom';
 
 
 // Init Sign-Up Form Functional Compoennt
 const SignUpForm: React.FC = ()=>{
 
-  const isLoading = true;
+  const isLoading = false;
   // Use-Form Hook to implement Sign-up schema
   /* SCHEMA:
     1. Name
@@ -128,15 +130,23 @@ const SignUpForm: React.FC = ()=>{
           )}
         />
         
-        {/* Submit Button --> ShadCN Component */}
-        <Button type="submit"
-        className='bg-gray-100 text-black hover:bg-gray-500 mt-10'>
-          {isLoading?(
-            <div className="flex-center">
-              Loading..
-            </div>
-          ):"Create Account"
-        }</Button>
+        <Button 
+          className="flex items-center justify-center bg-gray-100 text-black hover:bg-gray-500 mt-10"
+          disabled={isLoading}  // Optionally disable button while loading
+        >
+          {isLoading ? (
+            <Loader className="animate-spin mr-2 " />  // Spinner
+          ) : (
+            ""
+          )}
+          {isLoading ? "Loading..." : "Create Account"}
+        </Button>
+        
+        <p className='flex items-center justify-center text-small-regular mt-2 md:h-[14px]'>Already a User? 
+          <Link to="/sign-in">
+            <Button variant='link' className='text-gray-200 hover:text-gray-400'>Log In</Button>
+          </Link>
+        </p>
       </form>
     </Form>
   )
