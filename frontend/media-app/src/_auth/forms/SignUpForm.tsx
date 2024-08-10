@@ -8,6 +8,7 @@ import * as z from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
+
 import {
   Form,
   FormControl,
@@ -25,6 +26,7 @@ import { SignUpVaidationSchema } from '@/lib/validation';
 // Init Sign-Up Form Functional Compoennt
 const SignUpForm: React.FC = ()=>{
 
+  const isLoading = true;
   // Use-Form Hook to implement Sign-up schema
   /* SCHEMA:
     1. Name
@@ -69,7 +71,7 @@ const SignUpForm: React.FC = ()=>{
               <FormControl>
                 <Input 
                 autoComplete='name' 
-                className='shad-input' 
+                className='shad-input w-[330px]' 
                 type='text'
                 placeholder="Enter Name" {...field} />
               </FormControl>
@@ -114,12 +116,12 @@ const SignUpForm: React.FC = ()=>{
         {/* Password Input Element */}
         <FormField
           control={form.control}
-          name="username"
+          name="password"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input autoComplete='current-password' className='shad-input' type='text' placeholder="Enter Password" {...field} />
+                <Input autoComplete='current-password' className='shad-input' type='password' placeholder="Enter Password" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -127,7 +129,14 @@ const SignUpForm: React.FC = ()=>{
         />
         
         {/* Submit Button --> ShadCN Component */}
-        <Button type="submit" variant="ghost">Submit</Button>
+        <Button type="submit"
+        className='bg-gray-100 text-black hover:bg-gray-500 mt-10'>
+          {isLoading?(
+            <div className="flex-center">
+              Loading..
+            </div>
+          ):"Create Account"
+        }</Button>
       </form>
     </Form>
   )
