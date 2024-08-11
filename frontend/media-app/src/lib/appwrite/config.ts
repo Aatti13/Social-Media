@@ -1,8 +1,8 @@
 import { Client, Account, Databases, Storage, Avatars} from 'appwrite';
 
 export const appwriteConfigObj = {
-  projectID: import.meta.env.LAMBDA_APPWRITE_PROJECT_ID,
-  url: import.meta.env.APPWRITE_URL,
+  projectID: '66b8499e0028cbecb3a3',
+  url: 'https://cloud.appwrite.io/v1',
 }
 
 export const client = new Client();

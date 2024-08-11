@@ -1,14 +1,15 @@
 // IMPORTS
 
 // 1. Pre-existing Libraries
-import React from 'react';
+import React, {useState} from 'react';
 import * as z from 'zod';
 
 // 2. ShadCN imports
-import { Loader } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, Loader } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
+
 
 import {
   Form,
@@ -29,6 +30,11 @@ import { createUser } from '@/lib/appwrite/api';
 // Init Sign-Up Form Functional Compoennt
 const SignUpForm: React.FC = ()=>{
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+  };
   const isLoading = false;
   // Use-Form Hook to implement Sign-up schema
   /* SCHEMA:
@@ -50,8 +56,8 @@ const SignUpForm: React.FC = ()=>{
   // Submission function Handler
   async function onSubmit(values: z.infer<typeof SignUpVaidationSchema>) {
     const newUser = await createUser(values);
-
-    console.log(newUser);
+    console.log(`Account for ${newUser} has been created`);
+    // console.log(newUser);
   }
 
 
@@ -76,7 +82,7 @@ const SignUpForm: React.FC = ()=>{
               <FormControl>
                 <Input 
                 autoComplete='name' 
-                className='shad-input w-[330px]' 
+                className='shad-input w-[370px]' 
                 type='text'
                 placeholder="Enter Name" {...field} />
               </FormControl>
@@ -126,7 +132,15 @@ const SignUpForm: React.FC = ()=>{
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input autoComplete='current-password' className='shad-input' type='password' placeholder="Enter Password" {...field} />
+                <div className='relative'>
+                  <Input type={showPassword ? 'text' : 'password'}
+                  autoComplete='current-password' className='shad-input pr-40' placeholder="Enter Password" {...field} />
+                  <div
+                    onClick={togglePasswordVisibility}
+                    className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer'>
+                    {showPassword ? <EyeOffIcon />: <EyeIcon />}
+                  </div>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

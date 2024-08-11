@@ -1,7 +1,7 @@
 // IMPORTS
 
 // 1. Pre-existing Libraries
-import React from 'react';
+import React, {useState} from 'react';
 import * as z from 'zod';
 
 // 2. ShadCN imports
@@ -9,6 +9,7 @@ import { Loader } from 'lucide-react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 import {
   Form,
@@ -26,6 +27,12 @@ import { Link } from 'react-router-dom';
 
 
 const SignInForm: React.FC = ()=>{
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+  };
 
   const form = useForm<z.infer<typeof SignInAuthSchema>>({
     resolver: zodResolver(SignInAuthSchema),
@@ -61,7 +68,8 @@ const SignInForm: React.FC = ()=>{
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input autoComplete='email' className='shad-input w-[330px]' type='text' placeholder="Enter Email ID" {...field} />
+                <Input autoComplete='email' id='email' className='shad-input w-[370px] 
+                sm:w-[300px]' type='text' placeholder="Enter Email ID" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -76,7 +84,15 @@ const SignInForm: React.FC = ()=>{
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input autoComplete='current-password' className='shad-input' type='password' placeholder="Enter Password" {...field} />
+                <div className='relative'>
+                  <Input type={showPassword ? 'text' : 'password'}
+                  autoComplete='current-password' className='shad-input pr-40' placeholder="Enter Password" {...field} />
+                  <div
+                    onClick={togglePasswordVisibility}
+                    className='absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer'>
+                    {showPassword ? <EyeOffIcon />: <EyeIcon />}
+                  </div>
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>
