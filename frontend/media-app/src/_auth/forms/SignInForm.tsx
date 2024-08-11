@@ -35,8 +35,9 @@ const SignInForm: React.FC = ()=>{
     },
   })
 
-  function onSubmit(values: z.infer<typeof SignInAuthSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof SignInAuthSchema>) {
+    // const createUser
+    console.log(values);
   }
 
   const isLoading = false;

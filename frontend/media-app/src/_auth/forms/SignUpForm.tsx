@@ -23,6 +23,7 @@ import { Input } from "@/components/ui/input";
 // 3. User-defined inputs
 import { SignUpVaidationSchema } from '@/lib/validation';
 import { Link } from 'react-router-dom';
+import { createUser } from '@/lib/appwrite/api';
 
 
 // Init Sign-Up Form Functional Compoennt
@@ -47,8 +48,10 @@ const SignUpForm: React.FC = ()=>{
   })
 
   // Submission function Handler
-  function onSubmit(values: z.infer<typeof SignUpVaidationSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof SignUpVaidationSchema>) {
+    const newUser = await createUser(values);
+
+    console.log(newUser);
   }
 
 
