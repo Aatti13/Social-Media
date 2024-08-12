@@ -68,8 +68,7 @@ const SignInForm: React.FC = ()=>{
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input autoComplete='email' id='email' className='shad-input w-[370px] 
-                sm:w-[300px]' type='text' placeholder="Enter Email ID" {...field} />
+                <Input autoComplete='email' id='email' className='shad-input w-[370px]' type='text' placeholder="Enter Email ID" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
